@@ -35,7 +35,10 @@ export default async function handler(req, res) {
     const key = r.outcome || 'unknown';
     outcomeBreakdown[key] = (outcomeBreakdown[key] || 0) + 1;
   });
-
+     if (error) {
+    console.error('Supabase query error:', error);
+    return res.status(500).json({ error: error.message || 'failed to load metrics' });
+  }
   const objectionBreakdown = {};
   data.forEach((r) => {
     if (r.objection_type) {
