@@ -80,10 +80,10 @@ once you've run the four end-to-end test scenarios)*
 
 | Metric | Value |
 |---|---|
-| Total test calls | — |
-| Qualified rate | — |
-| Booking rate | — |
-| Avg call duration | — |
+| Total test calls | 7 |
+| Qualified rate | 4 |
+| Booking rate | 3|
+| Avg call duration | 3 minutes |
 
 Live, current numbers are always visible on the [dashboard](https://your-project.vercel.app/dashboard.html)
 itself rather than frozen here.
