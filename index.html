@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@vapi-ai/client-sdk-react/dist/embed/widget.umd.js"></script>
 <style>
   :root{
     --navy: #10152b;
@@ -173,6 +174,21 @@
 
   .call-note{ font-size:13px; color:var(--paper-dim); margin:16px 0 0; }
 
+  .or-divider{
+    display:flex; align-items:center; gap:14px;
+    margin:26px 0 18px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--paper-dim);
+  }
+  .or-divider::before, .or-divider::after{
+    content:""; flex:1; height:1px; background:var(--card-line);
+  }
+  .browser-call-wrap{
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+  }
+  .browser-call-note{ font-size:12px; color:var(--paper-dim); margin:0; }
+
   /* --- Signature: live call mock --- */
   .proof-eyebrow{
     font-family:'IBM Plex Mono', monospace;
@@ -336,9 +352,32 @@
       <!-- Replace with your claimed Vapi number -->
       <a class="phone-number" href="tel:+12132892110">+1 (213) 289 2110</a>
       <div>
-        <a class="cta" href="tel:12132892110">Call Sam now</a>
+        <a class="cta" href="tel:+12132892110">Call Sam now</a>
       </div>
       <p class="call-note">No form, no signup. Just call — it's a real, live agent.</p>
+
+      <div class="or-divider">or</div>
+
+      <div class="browser-call-wrap">
+        <!--
+          Talk to Sam right in the browser — no phone, no international dialing.
+          Replace public-key and assistant-id with your own from the Vapi dashboard
+          (Vapi API Keys → Public Key is safe to expose here, it is NOT the private key).
+        -->
+        <vapi-widget
+          public-key="9886b2a0-946c-4e6f-805b-727a096f86a5"
+          assistant-id="b36a0947-d316-4fc0-914e-322c3325d68b"
+          mode="voice"
+          theme="dark"
+          size="compact"
+          color-accent="#f5a623"
+          cta-button-color="#ff5a36"
+          cta-button-text-color="#0a0e1f"
+          cta-title="Talk to Sam"
+          cta-subtitle="No phone needed"
+        ></vapi-widget>
+        <p class="browser-call-note">Works from anywhere — no phone number required.</p>
+      </div>
     </div>
 
     <p class="proof-eyebrow">Don't just take the pitch</p>
