@@ -9,8 +9,8 @@ days, and by then the lead has already booked with whoever called first.
 handles the objections that normally kill the deal, and books a real
 appointment — on the call, with no human involved.**
 
-🔗 **Live demo:** https://your-project.vercel.app
-📊 **Live call metrics:** https://your-project.vercel.app/dashboard.html
+🔗 **Live demo:** https://vapi-solar-webhook.vercel.app/
+📊 **Live call metrics:** https://vapi-solar-webhook.vercel.app/dashboard.html
 
 ---
 
