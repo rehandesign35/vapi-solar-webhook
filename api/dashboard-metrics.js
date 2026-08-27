@@ -15,8 +15,9 @@ export default async function handler(req, res) {
     .from('calls')
     .select('qualified, outcome, objection_type, duration_seconds');
 
-  if (error) {
-    return res.status(500).json({ error: 'failed to load metrics' });
+    if (error) {
+    console.error('Supabase query error:', error);
+    return res.status(500).json({ error: error.message || 'failed to load metrics' });
   }
 
   const total = data.length;
@@ -34,8 +35,13 @@ export default async function handler(req, res) {
   data.forEach((r) => {
     const key = r.outcome || 'unknown';
     outcomeBreakdown[key] = (outcomeBreakdown[key] || 0) + 1;
+  
   });
-
+     if (error) {
+    console.error('Supabase query error:', error);
+    return res.status(500).json({ error: error.message || 'failed to load metrics' });
+  }
+  
   const objectionBreakdown = {};
   data.forEach((r) => {
     if (r.objection_type) {
