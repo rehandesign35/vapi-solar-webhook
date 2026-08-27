@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sam is a live AI voice agent that recovers, qualifies, and books solar leads.">
 <meta name="theme-color" content="#10152b">
 <title>Sam — AI Voice Agent for Solar Lead Recovery</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,6 +62,9 @@
     padding:6px 12px; border-radius:999px;
     background:rgba(79,209,196,0.06);
   }
+  .top-actions{ display:flex; align-items:center; gap:18px; }
+  .metrics-link{ color:var(--paper-dim); font-family:'IBM Plex Mono',monospace; font-size:12px; text-decoration:none; }
+  .metrics-link:hover, .metrics-link:focus-visible{ color:var(--amber); }
   .status-dot{
     width:7px; height:7px; border-radius:50%;
     background:var(--teal);
@@ -331,6 +335,12 @@
     .waveform span, .status-dot, .call-meta .sub .dot, .cursor{ animation:none !important; }
     .bubble{ transition:none; }
   }
+  @media (max-width:560px){
+    header.top{ padding:20px 18px; }
+    .top-actions{ gap:10px; }
+    .metrics-link{ font-size:10px; }
+    .status-pill{ font-size:10px; padding:6px 9px; }
+  }
 </style>
 </head>
 <body>
@@ -338,7 +348,7 @@
 
   <header class="top">
     <div class="brand">SAM <strong>//</strong> AI VOICE AGENT</div>
-    <div class="status-pill"><span class="status-dot"></span> Live now</div>
+    <div class="top-actions"><a class="metrics-link" href="/dashboard.html">Call metrics</a><div class="status-pill"><span class="status-dot"></span> Live now</div></div>
   </header>
 
   <main class="wrap" id="main-content">
