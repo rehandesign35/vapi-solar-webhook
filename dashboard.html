@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Call Metrics — Sam, AI Voice Agent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #10152b;
+    --navy-deep: #0a0e1f;
+    --card: #1b2140;
+    --card-line: #2a3159;
+    --amber: #f5a623;
+    --coral: #ff5a36;
+    --teal: #4fd1c4;
+    --paper: #f7f3ea;
+    --paper-dim: #b9bcd4;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 15% -10%, rgba(245,166,35,0.10), transparent 60%),
+      radial-gradient(900px 500px at 90% 10%, rgba(79,209,196,0.08), transparent 55%),
+      var(--navy);
+    color:var(--paper);
+    font-family:'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:inherit; }
+  .wrap{ max-width:960px; margin:0 auto; padding:0 24px; }
+
+  header.top{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:28px 24px; max-width:960px; margin:0 auto;
+  }
+  .brand{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--paper-dim);
+  }
+  .brand strong{ color:var(--teal); }
+  .back-link{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px; color:var(--paper-dim); text-decoration:none;
+  }
+  .back-link:hover, .back-link:focus-visible{ color:var(--amber); }
+
+  main{ padding:24px 0 80px; }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px; letter-spacing:0.06em;
+    color:var(--amber); text-transform:uppercase;
+    margin:0 0 14px;
+  }
+  h1{
+    font-family:'Unbounded', sans-serif;
+    font-weight:800;
+    font-size:clamp(28px, 5vw, 42px);
+    line-height:1.1; letter-spacing:-0.01em;
+    margin:0 0 12px;
+  }
+  .lede{
+    font-size:16px; line-height:1.6; color:var(--paper-dim);
+    max-width:58ch; margin:0 0 12px;
+  }
+  .updated{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--teal);
+    margin:0 0 40px;
+  }
+  .updated .dot{
+    width:6px; height:6px; border-radius:50%; background:var(--teal);
+    animation:pulse-dot 2.2s ease-out infinite;
+  }
+  @keyframes pulse-dot{
+    0%{ box-shadow:0 0 0 0 rgba(79,209,196,0.55); }
+    70%{ box-shadow:0 0 0 9px rgba(79,209,196,0); }
+    100%{ box-shadow:0 0 0 0 rgba(79,209,196,0); }
+  }
+
+  .stat-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr);
+    gap:16px; margin-bottom:48px;
+  }
+  @media (max-width:760px){ .stat-grid{ grid-template-columns:repeat(2, 1fr); } }
+  .stat-card{
+    background:var(--card);
+    border:1px solid var(--card-line);
+    border-radius:16px;
+    padding:20px;
+  }
+  .stat-value{
+    font-family:'Unbounded', sans-serif;
+    font-weight:800;
+    font-size:clamp(24px, 4vw, 34px);
+    color:var(--amber);
+    line-height:1;
+    margin:0 0 8px;
+  }
+  .stat-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:0.03em;
+    color:var(--paper-dim);
+  }
+
+  .section-title{
+    font-family:'Unbounded', sans-serif;
+    font-weight:600; font-size:20px;
+    margin:0 0 20px;
+  }
+
+  .bar-list{ margin-bottom:48px; }
+  .bar-row{ margin-bottom:16px; }
+  .bar-row .bar-top{
+    display:flex; justify-content:space-between; align-items:baseline;
+    font-size:14px; margin-bottom:6px;
+  }
+  .bar-row .bar-name{ color:var(--paper); }
+  .bar-row .bar-count{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--paper-dim); font-size:13px;
+  }
+  .bar-track{
+    height:8px; border-radius:999px;
+    background:var(--card);
+    border:1px solid var(--card-line);
+    overflow:hidden;
+  }
+  .bar-fill{
+    height:100%; border-radius:999px;
+    background:linear-gradient(90deg, var(--teal), var(--amber));
+    width:0%;
+    transition:width 0.8s ease;
+  }
+  .bar-fill.coral{ background:linear-gradient(90deg, var(--coral), var(--amber)); }
+
+  .empty-state{
+    background:var(--card);
+    border:1px dashed var(--card-line);
+    border-radius:16px;
+    padding:48px 28px;
+    text-align:center;
+  }
+  .empty-state h3{
+    font-family:'Unbounded', sans-serif;
+    font-size:18px; margin:0 0 10px;
+  }
+  .empty-state p{
+    font-size:14px; color:var(--paper-dim);
+    max-width:44ch; margin:0 auto 22px; line-height:1.6;
+  }
+  .empty-state a{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--coral); color:var(--navy-deep);
+    font-weight:600; font-size:14px;
+    padding:12px 22px; border-radius:999px;
+    text-decoration:none;
+  }
+
+  .error-note{
+    font-size:13px; color:var(--coral);
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  a:focus-visible{ outline:2px solid var(--teal); outline-offset:3px; }
+
+  @media (prefers-reduced-motion: reduce){
+    .updated .dot{ animation:none !important; }
+    .bar-fill{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="top">
+    <div class="brand">SAM <strong>//</strong> AI VOICE AGENT</div>
+    <a class="back-link" href="/">← Back to demo</a>
+  </header>
+
+  <main class="wrap">
+    <p class="eyebrow">Not a mockup</p>
+    <h1>Live call metrics</h1>
+    <p class="lede">Every number below comes from actual calls to the demo number — nothing here is staged or hardcoded.</p>
+    <p class="updated" id="updated"><span class="dot"></span> Loading…</p>
+
+    <div id="content"></div>
+  </main>
+
+<script>
+(function(){
+  var updatedEl = document.getElementById('updated');
+  var contentEl = document.getElementById('content');
+
+  function pct(n){ return Math.round((n || 0) * 100) + '%'; }
+
+  function humanize(key){
+    return key
+      .replace(/_/g, ' ')
+      .replace(/\b\w/g, function(c){ return c.toUpperCase(); });
+  }
+
+  function formatDuration(sec){
+    if (sec == null) return '—';
+    var m = Math.floor(sec / 60);
+    var s = sec % 60;
+    return m > 0 ? (m + 'm ' + s + 's') : (s + 's');
+  }
+
+  function barListHTML(breakdown, total, coral){
+    var entries = Object.entries(breakdown).sort(function(a, b){ return b[1] - a[1]; });
+    if (!entries.length) return '<p class="bar-row bar-count">No data yet.</p>';
+    return entries.map(function(entry){
+      var key = entry[0], count = entry[1];
+      var width = total ? Math.round((count / total) * 100) : 0;
+      return '' +
+        '<div class="bar-row">' +
+          '<div class="bar-top">' +
+            '<span class="bar-name">' + humanize(key) + '</span>' +
+            '<span class="bar-count">' + count + '</span>' +
+          '</div>' +
+          '<div class="bar-track"><div class="bar-fill' + (coral ? ' coral' : '') + '" data-width="' + width + '"></div></div>' +
+        '</div>';
+    }).join('');
+  }
+
+  function render(data){
+    if (!data.total_calls){
+      contentEl.innerHTML =
+        '<div class="empty-state">' +
+          '<h3>No calls yet</h3>' +
+          '<p>This dashboard is fully wired up and waiting for real data. Be the first call and these numbers will update within seconds of hanging up.</p>' +
+          '<a href="/">Call the demo number</a>' +
+        '</div>';
+      return;
+    }
+
+    contentEl.innerHTML =
+      '<div class="stat-grid">' +
+        '<div class="stat-card"><p class="stat-value">' + data.total_calls + '</p><p class="stat-label">Total calls</p></div>' +
+        '<div class="stat-card"><p class="stat-value">' + pct(data.qualified_rate) + '</p><p class="stat-label">Qualified rate</p></div>' +
+        '<div class="stat-card"><p class="stat-value">' + pct(data.booking_rate) + '</p><p class="stat-label">Booking rate</p></div>' +
+        '<div class="stat-card"><p class="stat-value">' + formatDuration(data.avg_duration_seconds) + '</p><p class="stat-label">Avg call duration</p></div>' +
+      '</div>' +
+
+      '<h2 class="section-title">Call outcomes</h2>' +
+      '<div class="bar-list">' + barListHTML(data.outcome_breakdown, data.total_calls, false) + '</div>' +
+
+      '<h2 class="section-title">Objections raised</h2>' +
+      '<div class="bar-list">' + barListHTML(data.objection_breakdown, data.total_calls, true) + '</div>';
+
+    requestAnimationFrame(function(){
+      document.querySelectorAll('.bar-fill').forEach(function(el){
+        el.style.width = el.getAttribute('data-width') + '%';
+      });
+    });
+  }
+
+  function setUpdated(){
+    var now = new Date();
+    updatedEl.innerHTML = '<span class="dot"></span> Updated ' +
+      now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  }
+
+  function load(){
+    fetch('/api/dashboard-metrics')
+      .then(function(r){
+        if (!r.ok) throw new Error('bad response');
+        return r.json();
+      })
+      .then(function(data){
+        render(data);
+        setUpdated();
+      })
+      .catch(function(){
+        updatedEl.innerHTML = '<span class="error-note">Couldn\u2019t load metrics — check the API endpoint.</span>';
+      });
+  }
+
+  load();
+  setInterval(load, 20000);
+})();
+</script>
+
+</body>
+</html>
