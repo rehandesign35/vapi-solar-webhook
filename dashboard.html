@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10152b">
 <title>Live Call Metrics — Sam, AI Voice Agent</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,6 +21,7 @@
     --paper-dim: #b9bcd4;
   }
   *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
   body{
     margin:0;
     background:
@@ -29,9 +31,12 @@
     color:var(--paper);
     font-family:'Inter', system-ui, sans-serif;
     -webkit-font-smoothing:antialiased;
+    -webkit-tap-highlight-color:rgba(79,209,196,0.22);
   }
   a{ color:inherit; }
   .wrap{ max-width:960px; margin:0 auto; padding:0 24px; }
+  .skip-link{ position:fixed; z-index:5; left:16px; top:-50px; padding:10px 14px; border-radius:7px; background:var(--teal); color:var(--navy-deep); font:600 12px 'IBM Plex Mono',monospace; text-decoration:none; }
+  .skip-link:focus{ top:16px; }
 
   header.top{
     display:flex; align-items:center; justify-content:space-between;
@@ -177,17 +182,18 @@
 </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <header class="top">
     <div class="brand">SAM <strong>//</strong> AI VOICE AGENT</div>
     <a class="back-link" href="/">← Back to demo</a>
   </header>
 
-  <main class="wrap">
+  <main class="wrap" id="main-content">
     <p class="eyebrow">Not a mockup</p>
     <h1>Live call metrics</h1>
     <p class="lede">Every number below comes from actual calls to the demo number — nothing here is staged or hardcoded.</p>
-    <p class="updated" id="updated"><span class="dot"></span> Loading…</p>
+    <p class="updated" id="updated" aria-live="polite"><span class="dot"></span> Loading…</p>
 
     <div id="content"></div>
   </main>
