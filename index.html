@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f6f2" />
+    <meta name="description" content="Solar voice agent performance dashboard" />
+    <title>Solar Signal | Call performance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <nav class="topbar" aria-label="Primary navigation">
+        <a class="brand" href="/" aria-label="Solar Signal home">
+          <span class="brand-mark" aria-hidden="true"><span></span></span>
+          <span>solar signal</span>
+        </a>
+        <div class="topbar-meta">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>voice operations</span>
+          <span class="date-stamp" id="today">--</span>
+        </div>
+      </nav>
+
+      <main>
+        <section class="hero" aria-labelledby="page-title">
+          <div>
+            <p class="eyebrow">Performance overview</p>
+            <h1 id="page-title">Turn conversations<br /><em>into rooftops.</em></h1>
+            <p class="hero-copy">A clear read on every qualified lead, objection, and booked solar opportunity.</p>
+          </div>
+          <div class="hero-note"><span class="note-line"></span><p>Metrics refresh automatically<br />from your latest calls.</p></div>
+        </section>
+
+        <section class="metrics-grid" aria-label="Key performance indicators">
+          <article class="metric-card metric-primary"><div class="metric-label"><span>Total calls</span><span class="metric-index">01</span></div><strong class="metric-value" data-metric="total_calls">--</strong><span class="metric-foot">All conversations received</span></article>
+          <article class="metric-card"><div class="metric-label"><span>Qualified rate</span><span class="metric-index">02</span></div><strong class="metric-value" data-metric="qualified_rate">--</strong><span class="metric-foot">Leads meeting your criteria</span></article>
+          <article class="metric-card"><div class="metric-label"><span>Booking rate</span><span class="metric-index">03</span></div><strong class="metric-value" data-metric="booking_rate">--</strong><span class="metric-foot">Calls ending in a booking</span></article>
+          <article class="metric-card"><div class="metric-label"><span>Avg. call length</span><span class="metric-index">04</span></div><strong class="metric-value" data-metric="avg_duration_seconds">--</strong><span class="metric-foot">Across calls with duration data</span></article>
+        </section>
+
+        <section class="dashboard-grid" aria-label="Call breakdowns">
+          <article class="panel pipeline-panel"><div class="panel-heading"><div><p class="eyebrow">Conversion path</p><h2>From hello to booked</h2></div><span class="panel-caption">call outcomes</span></div><div class="pipeline" id="pipeline" aria-live="polite"><div class="loading-bar"></div><div class="loading-bar short"></div><div class="loading-bar shorter"></div></div></article>
+          <article class="panel outcome-panel"><div class="panel-heading"><div><p class="eyebrow">Outcome mix</p><h2>Where calls land</h2></div><span class="panel-caption" id="generated-at">syncing</span></div><div class="outcome-list" id="outcomes" aria-live="polite"><div class="loading-row"></div><div class="loading-row"></div><div class="loading-row"></div></div></article>
+        </section>
+
+        <section class="lower-grid" aria-label="Conversation insights">
+          <article class="panel objections-panel"><div class="panel-heading"><div><p class="eyebrow">Conversation friction</p><h2>Top objections</h2></div><span class="panel-caption">all time</span></div><div class="objection-list" id="objections" aria-live="polite"><div class="loading-row"></div><div class="loading-row"></div><div class="loading-row"></div></div></article>
+          <aside class="insight-panel"><div class="sun-orbit" aria-hidden="true"><span></span></div><p class="eyebrow">Operator note</p><h2 id="insight-title">Ready when your<br />calls are.</h2><p id="insight-copy">Your next conversation is an opportunity to make the grid a little brighter.</p><button class="refresh-button" id="refresh-button" type="button">Refresh data <span aria-hidden="true">↗</span></button></aside>
+        </section>
+
+        <div class="error-state" id="error-state" role="alert" hidden><strong>Metrics are taking a moment.</strong><span id="error-copy">Check the connection and try again.</span><button class="text-button" id="retry-button" type="button">Try again</button></div>
+      </main>
+      <footer class="footer"><span>solar signal / operations desk</span><span>aggregate data only</span></footer>
+    </div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
