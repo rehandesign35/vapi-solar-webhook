@@ -75,15 +75,12 @@ framework, no build step.
 
 ## Real metrics
 
-*(numbers below are illustrative — replace with your actual test-call results
-once you've run the four end-to-end test scenarios)*
-
 | Metric | Value |
 |---|---|
-| Total test calls | 7 |
-| Qualified rate | 4 |
-| Booking rate | 3|
-| Avg call duration | 3 minutes |
+| Total calls | 59 |
+| Qualified calls | 6 |
+| Booked calls | 2 |
+| Avg call duration | 2 minutes 44 seconds |
 
 Live, current numbers are always visible on the [dashboard](https://your-project.vercel.app/dashboard.html)
 itself rather than frozen here.
